@@ -17,7 +17,7 @@ from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
 from sklearn.linear_model import LogisticRegression
-from sklearn.lda import LDA
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
 from sklearn.datasets import make_moons
 from sklearn.datasets import make_circles
 from sklearn.decomposition import KernelPCA
@@ -174,6 +174,7 @@ def plot_decision_regions(X, y, classifier, resolution=0.02):
         plt.scatter(x=X[y == cl, 0], y=X[y == cl, 1],
                     alpha=0.8, c=cmap(idx),
                     marker=markers[idx], label=cl)
+
 
 lr = LogisticRegression()
 lr = lr.fit(X_train_pca, y_train)
@@ -595,6 +596,7 @@ def project_x(x_new, X, gamma, alphas, lambdas):
     pair_dist = np.array([np.sum((x_new - row)**2) for row in X])
     k = np.exp(-gamma * pair_dist)
     return k.dot(alphas / lambdas)
+
 
 # projection of the "new" datapoint
 x_reproj = project_x(x_new, X, gamma=15, alphas=alphas, lambdas=lambdas)
